@@ -1,0 +1,75 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* shadcn semantic tokens, mapped to the Tomoro-style palette */
+:root {
+  --background: #ffffff;
+  --foreground: #1f1a17;
+  --card: #ffffff;
+  --card-foreground: #1f1a17;
+  --popover: #ffffff;
+  --popover-foreground: #1f1a17;
+  --primary: #d9242b;
+  --primary-foreground: #ffffff;
+  --secondary: #fdecea;
+  --secondary-foreground: #d9242b;
+  --muted: #f6f2ea;
+  --muted-foreground: #6b625b;
+  --accent: #ffc93c;
+  --accent-foreground: #1f1a17;
+  --destructive: #d92d20;
+  --border: #ebe5d8;
+  --input: #f7f7f7;
+  --ring: #d9242b;
+  --radius: 0.875rem;
+}
+
+@theme inline {
+  --font-sans: "Lexend", system-ui, sans-serif;
+  --font-heading: var(--font-sans);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  /* extra brand tokens */
+  --color-brand: #d9242b;
+  --color-amber: #ffc93c;
+  --color-peach: #fdecea;
+  --color-cream: #fff6dc;
+  --color-page: #f6f2ea;
+  --color-ink: #1f1a17;
+  --color-gold: #8f5b00;
+  --font-display: "Bowlby One", "Lexend", system-ui, sans-serif;
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { @apply font-sans; }
+  body { @apply bg-[#1c1c1c] text-foreground; }
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
