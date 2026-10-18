@@ -43,11 +43,12 @@ export const payments = [
 ]
 
 export const pastOrders = [
-  { id: 'KNM-1210', outlet: 'Kebab N Me – Pusat', date: '12/10/2026 12:24', status: 'Selesai', items: 'Kebab Original ×2', total: 36000, rate: true },
-  { id: 'KNM-0928', outlet: 'Kebab N Me – Kampus', date: '28/09/2026 19:13', status: 'Selesai', items: 'Paket Kenyang ×1', total: 32000 },
-  { id: 'KNM-0915', outlet: 'Kebab N Me – Pusat', date: '15/09/2026 13:02', status: 'Selesai', items: 'Kebab Jumbo Keju ×1', total: 28000 },
+  { id: 'KNM-1210', outlet: 'Kebab N Me – Pusat', date: '12/10/2026 12:24', status: 'Selesai', items: 'Kebab Original ×2', lines: [{ pid: 1, qty: 2 }], total: 36000, rate: true },
+  { id: 'KNM-0928', outlet: 'Kebab N Me – Kampus', date: '28/09/2026 19:13', status: 'Selesai', items: 'Paket Kenyang ×1', lines: [{ pid: 6, qty: 1 }], total: 32000 },
+  { id: 'KNM-0915', outlet: 'Kebab N Me – Pusat', date: '15/09/2026 13:02', status: 'Selesai', items: 'Kebab Jumbo Keju ×1', lines: [{ pid: 2, qty: 1 }], total: 28000 },
 ]
 
 export const POINTS = 948
 export const MIN_DELIVERY = 25000
 export const MEMBER_CODE = 'KNM-MEMBER-948221'
+export const GOLD_AT = 1000

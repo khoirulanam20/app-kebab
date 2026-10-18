@@ -1,4 +1,6 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link, useLocation } from 'react-router-dom'
+import { ShoppingBagIcon } from 'lucide-react'
+import { rupiah } from './data.js'
 import BottomNav from './components/BottomNav.jsx'
 import { useCart } from './cart.jsx'
 import Home from './pages/Home.jsx'
@@ -10,7 +12,9 @@ import Me from './pages/Me.jsx'
 import QR from './pages/QR.jsx'
 
 export default function App() {
-  const { toast } = useCart()
+  const { toast, count, subtotal } = useCart()
+  const { pathname } = useLocation()
+  const showMini = count > 0 && ['/', '/orders', '/me'].includes(pathname)
   return (
     <div className="relative mx-auto flex h-dvh max-w-[430px] flex-col overflow-hidden bg-white">
       <main className="no-scrollbar relative flex-1 overflow-y-auto">
@@ -27,6 +31,12 @@ export default function App() {
       <div aria-live="polite" className="pointer-events-none absolute inset-x-0 bottom-24 z-[60] flex justify-center px-4">
         {toast && <p className="rounded-full bg-foreground px-5 py-3 text-sm font-medium text-white shadow-lg">{toast}</p>}
       </div>
+      {showMini && (
+        <Link to="/checkout" className="relative z-20 flex items-center justify-between bg-cream px-4 py-3 text-sm font-semibold shadow-[0_-1px_0_var(--border)]">
+          <span className="flex items-center gap-2"><ShoppingBagIcon className="size-5 text-primary" />{count} item · {rupiah(subtotal)}</span>
+          <span className="text-primary">Lihat keranjang ›</span>
+        </Link>
+      )}
       <BottomNav />
     </div>
   )

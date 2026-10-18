@@ -38,6 +38,7 @@ export function CartProvider({ children }) {
       outlet: mode === 'pickup' ? outlets.find((x) => x.id === outlet).name : 'Antar ke rumah',
       date: new Date().toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' }),
       items: items.map((i) => `${i.product.name} ×${i.qty}`).join(', '),
+      lines: items.map((i) => ({ pid: i.product.id, qty: i.qty })),
     }, ...o])
     return id
   }
