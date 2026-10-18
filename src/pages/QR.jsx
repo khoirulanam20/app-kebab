@@ -77,7 +77,7 @@ function Scanner() {
 export default function QR() {
   const [tab, setTab] = useState('mine')
   return (
-    <div className="min-h-full bg-muted pb-14">
+    <div className="flex min-h-full flex-col bg-muted pb-14">
       <header className="bg-primary px-4 pb-6 pt-8 text-white">
         <h1 className="font-display text-xl">QR</h1>
         <Tabs value={tab} onValueChange={setTab} className="mt-4">
@@ -87,16 +87,18 @@ export default function QR() {
           </TabsList>
         </Tabs>
       </header>
-      <Card className="mx-4 -mt-2">
+      <div className="flex flex-1 items-center px-4 py-6">
+      <Card className="w-full">
         {tab === 'mine' ? (
           <div className="flex flex-col items-center gap-4 p-6 text-center">
             <p className="font-semibold">Khoirul Anam</p>
-            <div className="rounded-2xl border-4 border-foreground p-3"><QRCodeSVG value={MEMBER_CODE} size={208} role="img" title={`QR member ${MEMBER_CODE}`} /></div>
+            <div className="rounded-2xl border-4 border-foreground p-3"><QRCodeSVG value={MEMBER_CODE} size={208} className="block" role="img" title={`QR member ${MEMBER_CODE}`} /></div>
             <p className="font-mono text-sm tracking-wider">{MEMBER_CODE}</p>
             <p className="text-sm text-muted-foreground">Tunjukin ke abang kasir biar poinnya masuk.</p>
           </div>
         ) : <Scanner />}
       </Card>
+      </div>
     </div>
   )
 }
