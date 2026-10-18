@@ -1,0 +1,9 @@
+# Render blueprint for the mock API: https://render.com  ->  New > Blueprint
+services:
+  - type: web
+    name: kebab-mock-api
+    runtime: node
+    plan: free
+    buildCommand: echo "no build step"
+    startCommand: node mock-api/server.mjs
+    healthCheckPath: /api/health

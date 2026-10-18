@@ -31,6 +31,8 @@ export const extras = [{ n: 'Extra Keju', add: 4000 }, { n: 'Extra Daging', add:
 export const outlets = [
   { id: 1, name: 'Kebab N Me – Pusat', addr: 'Jl. Merdeka No. 12', km: 1.2 },
   { id: 2, name: 'Kebab N Me – Kampus', addr: 'Jl. Kaliurang Km 5', km: 3.2 },
+  { id: 3, name: 'Kebab N Me – Condongcatur', addr: 'Jl. Affandi No. 21', km: 4.1 },
+  { id: 4, name: 'Kebab N Me – Godean', addr: 'Jl. Godean Km 6', km: 5.8 },
 ]
 
 export const payments = [

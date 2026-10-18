@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "api": "node mock-api/server.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

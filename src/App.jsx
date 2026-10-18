@@ -10,6 +10,7 @@ import Payment from './pages/Payment.jsx'
 import Orders from './pages/Orders.jsx'
 import Me from './pages/Me.jsx'
 import QR from './pages/QR.jsx'
+import Points from './pages/Points.jsx'
 
 export default function App() {
   const { toast, count, subtotal } = useCart()
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/payment" element={<Payment />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/qr" element={<QR />} />
+          <Route path="/points" element={<Points />} />
           <Route path="/me" element={<Me />} />
         </Routes>
       </main>

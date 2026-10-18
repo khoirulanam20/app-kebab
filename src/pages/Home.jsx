@@ -8,7 +8,8 @@ import { Card } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogClose, DialogTitle } from '@/components/ui/dialog'
 import ProductSheet from '../components/ProductSheet.jsx'
 import { useCart } from '../cart.jsx'
-import { products, rupiah, POINTS, GOLD_AT } from '../data.js'
+import { products, rupiah } from '../data.js'
+import { useMember } from '../member.jsx'
 
 const slides = [
   { title: 'Always', accent: 'Kebab', sub: 'Beli 5 gratis 1, Bang!', tag: 'STEMPEL', icon: SandwichIcon, image: '/images/products/kebab-original.jpg', bg: 'bg-primary', fg: 'text-white', hl: 'text-accent' },
@@ -90,6 +91,8 @@ const ModeButton = ({ icon: Icon, title, note, onClick }) => (
 export default function Home() {
   const nav = useNavigate()
   const { setMode, notify } = useCart()
+  const { member, level, next, owned } = useMember()
+  const pct = next ? Math.min(100, Math.round(((member.lifetime - level.min) / (next.min - level.min)) * 100)) : 100
   const [popup, setPopup] = useState(() => !sessionStorage.getItem('knm-popup'))
   const [sheet, setSheet] = useState(null)
   const go = (m) => { setMode(m); nav('/menu') }
@@ -109,14 +112,16 @@ export default function Home() {
           <ModeButton icon={PackageCheckIcon} title="Pickup" onClick={() => go('pickup')} />
           <ModeButton icon={MotorbikeIcon} title="Delivery" onClick={() => go('delivery')} />
         </div>
-        <Card className="mt-3 p-4">
-          <div className="flex items-center justify-between text-sm">
-            <span className="flex items-center gap-2 font-semibold"><CoinsIcon className="size-5 text-accent" />{POINTS} poin</span>
-            <span className="flex items-center gap-1.5 text-muted-foreground"><TicketIcon className="size-4 text-primary" />Voucher: 0</span>
-          </div>
-          <div className="mt-3 h-2 overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuenow={POINTS} aria-valuemax={GOLD_AT} aria-label="Menuju level Gold"><div className="h-full rounded-full bg-accent" style={{ width: `${(POINTS / GOLD_AT) * 100}%` }} /></div>
-          <p className="mt-1.5 text-[13px] text-muted-foreground">{GOLD_AT - POINTS} poin lagi ke Gold</p>
-        </Card>
+        <button onClick={() => nav('/points')} aria-label="Lihat poin dan level member" className="mt-3 block w-full text-left">
+          <Card className="p-4">
+            <div className="flex items-center justify-between text-sm">
+              <span className="flex items-center gap-2 font-semibold"><CoinsIcon className="size-5 text-accent" />{member.points} poin<Badge variant="secondary" className="ml-1">{level.name}</Badge></span>
+              <span className="flex items-center gap-1.5 text-muted-foreground"><TicketIcon className="size-4 text-primary" />Voucher: {owned.length}</span>
+            </div>
+            <div className="mt-3 h-2 overflow-hidden rounded-full bg-muted" role="progressbar" aria-label={`Menuju level ${next?.name ?? level.name}`} aria-valuenow={pct} aria-valuemax={100}><div className="h-full rounded-full bg-accent" style={{ width: `${pct}%` }} /></div>
+            <p className="mt-1.5 text-[13px] text-muted-foreground">{next ? `${next.toGo} poin lagi ke ${next.name}` : `Level ${level.name} (tertinggi)`} ›</p>
+          </Card>
+        </button>
         <ul className="mt-4 grid grid-cols-4 text-center text-[13px]">
           {shortcuts.map(([Icon, l, fn]) => (
             <li key={l}><button onClick={fn} className="flex w-full flex-col items-center gap-1.5 py-1"><span aria-hidden className="flex size-9 items-center justify-center rounded-full bg-accent/40"><Icon className="size-4 text-primary" /></span>{l}</button></li>

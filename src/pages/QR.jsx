@@ -5,7 +5,7 @@ import { CameraOffIcon, CheckCircle2Icon, CircleAlertIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { MEMBER_CODE } from '../data.js'
+import { useMember } from '../member.jsx'
 
 function Scanner() {
   const video = useRef()
@@ -75,6 +75,8 @@ function Scanner() {
 }
 
 export default function QR() {
+  const { member } = useMember()
+  const MEMBER_CODE = member.code
   const [tab, setTab] = useState('mine')
   return (
     <div className="flex min-h-full flex-col bg-muted pb-14">
@@ -91,7 +93,7 @@ export default function QR() {
       <Card className="w-full">
         {tab === 'mine' ? (
           <div className="flex flex-col items-center gap-4 p-6 text-center">
-            <p className="font-semibold">Khoirul Anam</p>
+            <p className="font-semibold">{member.name}</p>
             <div className="rounded-2xl border-4 border-foreground p-3"><QRCodeSVG value={MEMBER_CODE} size={208} className="block" role="img" title={`QR member ${MEMBER_CODE}`} /></div>
             <p className="font-mono text-sm tracking-wider">{MEMBER_CODE}</p>
             <p className="text-sm text-muted-foreground">Tunjukin ke abang kasir biar poinnya masuk.</p>

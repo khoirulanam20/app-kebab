@@ -1,32 +1,40 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ChevronLeftIcon, ChevronRightIcon, StoreIcon, PackageCheckIcon, MotorbikeIcon, ShoppingBagIcon, CoinsIcon } from 'lucide-react'
+import { ChevronLeftIcon, ChevronRightIcon, StoreIcon, PackageCheckIcon, MotorbikeIcon, ShoppingBagIcon, CoinsIcon, TicketIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 import QtyStepper from '../components/QtyStepper.jsx'
 import { useCart } from '../cart.jsx'
-import { outlets, rupiah, POINTS, MIN_DELIVERY } from '../data.js'
+import { outlets, rupiah, MIN_DELIVERY } from '../data.js'
+import { useMember } from '../member.jsx'
+import { voucherDiscount } from '../lib/membership.js'
 
 const modeTab = 'h-12 flex-none grow rounded-b-none rounded-t-2xl bg-black/5 after:hidden data-active:bg-white'
 
 export default function Checkout() {
   const nav = useNavigate()
   const { items, setQty, subtotal, mode, setMode, outlet, setOutlet } = useCart()
-  const [usePts, setUsePts] = useState(true)
+  const { member, config, owned, redeemMax, earnPreview, online } = useMember()
+  const [blocks, setBlocks] = useState(0)
+  const [voucherCode, setVoucherCode] = useState(null)
+  const [vSheet, setVSheet] = useState(false)
   const [far, setFar] = useState(false)
   const [picker, setPicker] = useState(false)
   const o = outlets.find((x) => x.id === outlet)
   const ongkir = mode === 'delivery' ? 8000 : 0
-  const canRedeem = POINTS >= 100 && subtotal >= 10000
-  const disc = usePts && canRedeem ? 5000 : 0
   const belowMin = mode === 'delivery' && subtotal < MIN_DELIVERY
-  const total = Math.max(0, subtotal + ongkir - disc)
+  const voucher = owned.find((v) => v.code === voucherCode && subtotal >= v.min) ?? null
+  const vDisc = voucherDiscount(subtotal, voucher)
+  const payable = Math.max(0, subtotal + ongkir - vDisc)
+  const maxBlocks = redeemMax(payable)
+  const useBlocks = Math.min(blocks, maxBlocks)
+  const pDisc = useBlocks * config.points.redeemValue
+  const discount = vDisc + pDisc
+  const total = Math.max(0, payable - pDisc)
 
   const Header = (
     <header className="relative flex h-14 items-center justify-center bg-muted">
@@ -45,7 +53,8 @@ export default function Checkout() {
       </div>
     )
 
-  const pay = () => (o.km > 3 && mode === 'pickup' ? setFar(true) : nav('/payment', { state: { total } }))
+  const goPay = () => nav('/payment', { state: { total, subtotal, discount, redeemPts: useBlocks * config.points.redeemPts, voucher: voucher?.code ?? null } })
+  const pay = () => (o.km > 3 && mode === 'pickup' ? setFar(true) : goPay())
 
   return (
     <div className="flex min-h-full flex-col bg-muted">
@@ -83,18 +92,18 @@ export default function Checkout() {
               <QtyStepper qty={i.qty} removable onChange={(n) => setQty(i.key, n)} />
             </div>
           ))}
-          <p className="flex h-12 items-center justify-between text-sm">Voucher <span className="text-muted-foreground">Belum ada</span></p>
-          <Label className="flex h-12 cursor-pointer items-center justify-between text-sm font-normal">
-            <span className="flex items-center gap-2"><CoinsIcon className="size-5 text-accent" /> Tukar 100 poin{!canRedeem && <small className="text-muted-foreground">(min. belanja Rp 10.000)</small>}</span>
-            <span className="flex items-center gap-3 font-medium text-primary">- Rp 5.000
-              <Checkbox checked={usePts && canRedeem} disabled={!canRedeem} onCheckedChange={setUsePts} className="size-6 rounded-full" aria-label="Tukar 100 poin" /></span>
-          </Label>
+          <button onClick={() => setVSheet(true)} className="flex h-12 w-full items-center justify-between text-sm"><span className="flex items-center gap-2"><TicketIcon className="size-5 text-primary" aria-hidden />Voucher</span><span className={voucher ? 'font-medium text-primary' : 'text-muted-foreground'}>{voucher ? `${voucher.code} · -${rupiah(vDisc)}` : owned.length ? `${owned.length} tersedia ›` : 'Belum ada'}</span></button>
+          <div className="flex items-center justify-between gap-3 py-2 text-sm">
+            <span className="flex items-center gap-2"><CoinsIcon className="size-5 text-accent" aria-hidden /><span>Tukar poin<small className="block text-muted-foreground">{maxBlocks > 0 ? `Saldo ${member.points} · tiap ${config.points.redeemPts} poin = ${rupiah(config.points.redeemValue)}` : `Min. belanja ${rupiah(config.points.minSubtotal)} dan saldo ${config.points.redeemPts} poin`}</small></span></span>
+            <QtyStepper qty={useBlocks} min={0} max={maxBlocks} onChange={(n) => setBlocks(Math.max(0, Math.min(maxBlocks, n)))} />
+          </div>
         </Card>
 
         <Card className="gap-3 p-4 text-sm">
           <Row l="Subtotal" v={rupiah(subtotal)} />
           {ongkir > 0 && <Row l="Ongkir" v={rupiah(ongkir)} />}
-          {disc > 0 && <Row l="Poin ditukar" v={'- ' + rupiah(disc)} red />}
+          {vDisc > 0 && <Row l={`Voucher ${voucher.code}`} v={'- ' + rupiah(vDisc)} red />}
+          {pDisc > 0 && <Row l={`Tukar ${useBlocks * config.points.redeemPts} poin`} v={'- ' + rupiah(pDisc)} red />}
           <Separator className="border-t border-dashed bg-transparent" />
           <Row l="Total" v={rupiah(total)} big />
         </Card>
@@ -102,9 +111,9 @@ export default function Checkout() {
 
       <div className="sticky bottom-0 z-30 bg-white">
         {belowMin && <p role="alert" className="bg-secondary py-2 text-center text-sm font-medium text-primary">Minimal order antar {rupiah(MIN_DELIVERY)}. Tambah {rupiah(MIN_DELIVERY - subtotal)} lagi, Bang!</p>}
-        <p className="bg-cream py-2 text-center text-sm font-medium text-gold"><CoinsIcon className="mr-1 inline size-4" /> Dapat +{Math.floor(total / 1000)} poin</p>
+        <p className="bg-cream py-2 text-center text-sm font-medium text-gold"><CoinsIcon className="mr-1 inline size-4" /> Dapat +{earnPreview(total)} poin{!online && <small className="ml-1 font-normal text-muted-foreground">(mode demo)</small>}</p>
         <div className="flex items-center justify-between gap-3 px-4 py-3">
-          <div><span className="block text-xl font-semibold">{rupiah(total)}</span>{disc > 0 && <s className="text-xs text-muted-foreground">{rupiah(subtotal + ongkir)}</s>}</div>
+          <div><span className="block text-xl font-semibold">{rupiah(total)}</span>{discount > 0 && <s className="text-xs text-muted-foreground">{rupiah(subtotal + ongkir)}</s>}</div>
           <Button onClick={pay} disabled={belowMin} className="px-8">Pilih Pembayaran</Button>
         </div>
       </div>
@@ -116,10 +125,24 @@ export default function Checkout() {
           <Card className="mt-4 flex-row items-center gap-3 p-4 font-semibold"><StoreIcon className="size-5" /><span>{o.name.split('– ')[1]}<small className="block font-normal"><span className="text-primary">{o.km}km</span> dari lokasimu</small></span></Card>
           <div className="mt-5 grid grid-cols-2 gap-3">
             <Button variant="outline" onClick={() => { setFar(false); setPicker(true) }}>Ganti</Button>
-            <Button onClick={() => nav('/payment', { state: { total } })}>Yakin</Button>
+            <Button onClick={goPay}>Yakin</Button>
           </div>
         </DialogContent>
       </Dialog>
+
+      <Sheet open={vSheet} onOpenChange={setVSheet}>
+        <SheetContent side="bottom">
+          <div className="space-y-3 p-5 pt-6">
+            <SheetTitle className="font-semibold">Pilih Voucher</SheetTitle>
+            <button onClick={() => { setVoucherCode(null); setVSheet(false) }} aria-pressed={!voucher} className={`w-full rounded-2xl p-4 text-left ${!voucher ? 'bg-secondary' : 'bg-muted'}`}>Tanpa voucher</button>
+            {owned.map((v) => { const ok = subtotal >= v.min; return (
+              <button key={v.code} disabled={!ok} onClick={() => { setVoucherCode(v.code); setVSheet(false) }} aria-pressed={voucher?.code === v.code} className={`w-full rounded-2xl p-4 text-left disabled:opacity-60 ${voucher?.code === v.code ? 'bg-secondary' : 'bg-muted'}`}>
+                <p className="font-semibold">{v.code} · {v.type === 'pct' ? `${v.value}%` : rupiah(v.value)}</p><p className="text-sm text-muted-foreground">{ok ? `Hemat ${rupiah(voucherDiscount(subtotal, v))}` : `Min. belanja ${rupiah(v.min)}`} · s/d {v.until}</p>
+              </button>) })}
+            {!owned.length && <p className="py-4 text-center text-sm text-muted-foreground">Kamu belum punya voucher.</p>}
+          </div>
+        </SheetContent>
+      </Sheet>
 
       <Sheet open={picker} onOpenChange={setPicker}>
         <SheetContent side="bottom">

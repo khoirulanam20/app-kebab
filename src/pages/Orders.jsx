@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { SandwichIcon, ReceiptTextIcon } from 'lucide-react'
+import { QRCodeSVG } from 'qrcode.react'
+import { SandwichIcon, ReceiptTextIcon, CoinsIcon } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -27,6 +28,14 @@ function OrderCard({ o, onRate, onAgain }) {
         )}
         <p className="flex-1 text-sm">{o.items}</p><p className="text-sm font-semibold">{rupiah(o.total)}</p>
       </div>
+      {o.active && o.pickupCode && (
+        <div className={`mt-3 flex items-center gap-4 rounded-xl p-3 ${o.rawStatus === 'Siap' ? 'bg-accent/40' : 'bg-muted'}`}>
+          <div className="rounded-lg border-2 border-foreground bg-white p-1"><QRCodeSVG value={`KNM-PICKUP|${o.id}|${o.pickupCode}`} size={64} className="block" role="img" title="QR kode ambil" /></div>
+          <div className="text-sm"><p className="font-semibold">{o.rawStatus === 'Siap' ? 'Pesananmu siap diambil!' : 'Kode ambil'}</p><p className="font-mono text-2xl font-bold tracking-[0.25em]">{o.pickupCode}</p><p className="text-[13px] text-muted-foreground">Tunjukkan ke kasir.</p></div>
+        </div>
+      )}
+      {o.active && !o.pickupCode && o.api && o.delivery && <p className="mt-3 rounded-xl bg-muted p-3 text-sm text-muted-foreground">Kurir mengantar ke alamatmu begitu pesanan siap.</p>}
+      {!o.active && o.earned > 0 && <p className="mt-3 flex items-center gap-1.5 text-sm text-muted-foreground"><CoinsIcon className="size-4 text-accent" aria-hidden />Dapat {o.earned} poin dari pesanan ini</p>}
       {!o.active && (
         <div className="mt-3 flex justify-end gap-2">
           {o.rate && <Button variant="outline" size="sm" onClick={onRate}>Kasih Nilai</Button>}

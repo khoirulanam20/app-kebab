@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { QRCodeSVG } from 'qrcode.react'
 import { ChevronLeftIcon, CircleCheckIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -13,18 +14,31 @@ export default function Payment() {
   const nav = useNavigate()
   const { state } = useLocation()
   const { clear, mode, placeOrder } = useCart()
-  const [orderId, setOrderId] = useState('')
+  const [res, setRes] = useState(null) // { id, pickupCode }
+  const [busy, setBusy] = useState(false)
   const [sel, setSel] = useState('shopee')
-  const [done, setDone] = useState(false)
   const total = state?.total ?? 0
+  const pay = async () => {
+    if (busy) return
+    setBusy(true)
+    try { setRes(await placeOrder({ total, subtotal: state?.subtotal ?? total, discount: state?.discount ?? 0, redeemPts: state?.redeemPts ?? 0, voucher: state?.voucher ?? null, method: sel })) } finally { setBusy(false) }
+  }
 
-  if (done)
+  if (res)
     return (
       <div className="flex h-full flex-col items-center justify-center gap-3 bg-muted p-8 text-center">
         <CircleCheckIcon className="size-20 text-primary" aria-hidden />
         <h1 className="font-display text-2xl">Pesanan Masuk!</h1>
-        <p className="text-sm text-muted-foreground">{mode === 'pickup' ? 'Abang lagi ngiris kebabmu. Ambil 5–10 menit lagi.' : 'Kurir segera meluncur ke tempatmu.'}</p>
-        <Badge variant="secondary" className="h-7 px-4 text-sm">{orderId}</Badge>
+        <p className="text-sm text-muted-foreground">{mode === 'pickup' ? 'Abang lagi ngiris kebabmu. Kami kabari kalau sudah siap diambil.' : 'Kurir segera meluncur ke tempatmu.'}</p>
+        <Badge variant="secondary" className="h-7 px-4 text-sm">{res.id}</Badge>
+        {res.pickupCode && (
+          <div className="w-full max-w-xs rounded-2xl bg-white p-4">
+            <p className="text-sm font-medium">Kode ambil pesanan</p>
+            <p className="my-1 font-mono text-4xl font-bold tracking-[0.3em]" aria-label={`Kode ambil ${res.pickupCode.split('').join(' ')}`}>{res.pickupCode}</p>
+            <div className="mx-auto my-2 w-fit rounded-xl border-4 border-foreground p-2"><QRCodeSVG value={`KNM-PICKUP|${res.id}|${res.pickupCode}`} size={120} className="block" role="img" title="QR kode ambil" /></div>
+            <p className="text-[13px] text-muted-foreground">Tunjukkan kode atau QR ini ke kasir saat mengambil pesanan.</p>
+          </div>
+        )}
         <Button onClick={() => { clear(); nav('/orders') }} className="mt-4">Lihat Pesanan</Button>
       </div>
     )
@@ -54,7 +68,7 @@ export default function Payment() {
           ))}
         </RadioGroup>
       </Card>
-      <div className="mt-auto bg-white p-4"><Button onClick={() => { setOrderId(placeOrder(total)); setDone(true) }} className="w-full text-lg">Bayar</Button></div>
+      <div className="mt-auto bg-white p-4"><Button onClick={pay} disabled={busy} className="w-full text-lg">{busy ? 'Memproses…' : 'Bayar'}</Button></div>
     </div>
   )
 }
