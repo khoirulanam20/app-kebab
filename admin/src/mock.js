@@ -35,16 +35,16 @@ const V = {
 }
 
 export const products = [
-  { id: 1, sku: 'KBB-001', variants: V.isi, cat: 'kebab', name: 'Kebab Original', desc: 'Tortilla lembut isi daging sapi, selada, tomat, dan saus spesial.', price: 18000, stock: 42, opts: true, active: true, badge: 'Terlaris', outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
-  { id: 2, sku: 'KBB-002', cat: 'kebab', name: 'Kebab Jumbo Keju', desc: 'Ukuran jumbo dengan lelehan keju mozzarella dan daging ekstra.', price: 28000, stock: 18, opts: true, active: true, badge: 'Baru', outlets: [1, 2, 3, 4], outletPrice: { 2: 29000 }, schedule: null },
-  { id: 3, sku: 'KBB-003', cat: 'kebab', name: 'Kebab Ayam Pedas', desc: 'Ayam bumbu pedas manis, bawang bombay, dan mayo sambal.', price: 20000, stock: 7, opts: true, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
-  { id: 4, sku: 'BRG-001', cat: 'burger', name: 'Burger Kebab Beef', desc: 'Roti burger isi daging kebab, keju, dan saus bawang putih.', price: 24000, stock: 15, opts: true, active: true, outlets: [1], outletPrice: {}, schedule: null },
-  { id: 5, sku: 'HTD-001', cat: 'hotdog', name: 'Hotdog Kebab', desc: 'Roti panjang dengan sosis sapi dan irisan daging kebab.', price: 16000, stock: 0, opts: true, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
-  { id: 6, sku: 'PKT-001', cat: 'paket', name: 'Paket Kenyang', desc: 'Kebab Original + kentang goreng + es teh.', price: 32000, was: 38000, stock: 25, active: true, badge: 'Hemat', outlets: [1, 2, 3, 4], outletPrice: {}, schedule: { from: '10:00', to: '17:00' }, bundle: [{ pid: 1, qty: 1 }, { pid: 10, qty: 1 }, { pid: 8, qty: 1 }] },
-  { id: 7, sku: 'PKT-002', cat: 'paket', name: 'Paket Berdua', desc: '2 Kebab Original + 2 minuman + 1 kentang goreng.', price: 55000, was: 64000, stock: 12, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null, bundle: [{ pid: 1, qty: 2 }, { pid: 8, qty: 2 }, { pid: 10, qty: 1 }] },
-  { id: 8, sku: 'MNM-001', variants: V.minum, cat: 'minum', name: 'Es Teh Manis', desc: 'Teh segar dingin, manisnya pas.', price: 6000, stock: 80, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
-  { id: 9, sku: 'MNM-002', variants: V.minum, cat: 'minum', name: 'Lemon Tea', desc: 'Teh dengan perasan lemon segar.', price: 9000, stock: 55, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
-  { id: 10, sku: 'CML-001', cat: 'camilan', name: 'Kentang Goreng', desc: 'Kentang renyah dengan bumbu tabur.', price: 12000, stock: 30, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
+  { id: 1, sku: 'KBB-001', image: '/images/kebab-original.jpg', variants: V.isi, cat: 'kebab', name: 'Kebab Original', desc: 'Tortilla lembut isi daging sapi, selada, tomat, dan saus spesial.', price: 18000, stock: 42, opts: true, active: true, badge: 'Terlaris', outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
+  { id: 2, sku: 'KBB-002', image: '/images/kebab-jumbo-keju.jpg', cat: 'kebab', name: 'Kebab Jumbo Keju', desc: 'Ukuran jumbo dengan lelehan keju mozzarella dan daging ekstra.', price: 28000, stock: 18, opts: true, active: true, badge: 'Baru', outlets: [1, 2, 3, 4], outletPrice: { 2: 29000 }, schedule: null },
+  { id: 3, sku: 'KBB-003', image: '/images/kebab-ayam-pedas.jpg', cat: 'kebab', name: 'Kebab Ayam Pedas', desc: 'Ayam bumbu pedas manis, bawang bombay, dan mayo sambal.', price: 20000, stock: 7, opts: true, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
+  { id: 4, sku: 'BRG-001', image: '/images/burger-kebab.jpg', cat: 'burger', name: 'Burger Kebab Beef', desc: 'Roti burger isi daging kebab, keju, dan saus bawang putih.', price: 24000, stock: 15, opts: true, active: true, outlets: [1], outletPrice: {}, schedule: null },
+  { id: 5, sku: 'HTD-001', image: '/images/hotdog-kebab.jpg', cat: 'hotdog', name: 'Hotdog Kebab', desc: 'Roti panjang dengan sosis sapi dan irisan daging kebab.', price: 16000, stock: 0, opts: true, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
+  { id: 6, sku: 'PKT-001', image: '/images/paket-kenyang.jpg', cat: 'paket', name: 'Paket Kenyang', desc: 'Kebab Original + kentang goreng + es teh.', price: 32000, was: 38000, stock: 25, active: true, badge: 'Hemat', outlets: [1, 2, 3, 4], outletPrice: {}, schedule: { from: '10:00', to: '17:00' }, bundle: [{ pid: 1, qty: 1 }, { pid: 10, qty: 1 }, { pid: 8, qty: 1 }] },
+  { id: 7, sku: 'PKT-002', image: '/images/paket-berdua.jpg', cat: 'paket', name: 'Paket Berdua', desc: '2 Kebab Original + 2 minuman + 1 kentang goreng.', price: 55000, was: 64000, stock: 12, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null, bundle: [{ pid: 1, qty: 2 }, { pid: 8, qty: 2 }, { pid: 10, qty: 1 }] },
+  { id: 8, sku: 'MNM-001', image: '/images/es-teh-manis.jpg', variants: V.minum, cat: 'minum', name: 'Es Teh Manis', desc: 'Teh segar dingin, manisnya pas.', price: 6000, stock: 80, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
+  { id: 9, sku: 'MNM-002', image: '/images/lemon-tea.jpg', variants: V.minum, cat: 'minum', name: 'Lemon Tea', desc: 'Teh dengan perasan lemon segar.', price: 9000, stock: 55, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
+  { id: 10, sku: 'CML-001', image: '/images/kentang-goreng.jpg', cat: 'camilan', name: 'Kentang Goreng', desc: 'Kentang renyah dengan bumbu tabur.', price: 12000, stock: 30, active: true, outlets: [1, 2, 3, 4], outletPrice: {}, schedule: null },
 ]
 
 export const ingredients = [
@@ -215,7 +215,7 @@ export const faqSeed = [
   { id: 2, q: 'Bagaimana kalau pesanan salah?', a: 'Hubungi kami lewat menu Bantuan, abang ganti.' },
 ]
 export const settingsSeed = {
-  business: { name: 'Kebab N Me', tagline: 'Always Kebab', phone: '0812-1111-2222', email: 'owner@kebabnme.id', address: 'Jl. Merdeka No. 12, Yogyakarta', timezone: 'WIB', logo: null },
+  business: { name: 'Kebab N Me', tagline: 'Always Kebab', about: 'Kebab N Me jualan kebab hangat yang dibuat saat kamu pesan. Dagingnya diiris pas dipesan, bukan stok kemarin. Ada di beberapa cabang, bisa diambil sendiri atau diantar ke rumah.', phone: '0812-1111-2222', email: 'owner@kebabnme.id', address: 'Jl. Merdeka No. 12, Yogyakarta', timezone: 'WIB', logo: null },
   gateway: { provider: 'Midtrans', mode: 'sandbox', serverKey: 'SB-Mid-server-xxxxxxxxxxxxxxxx', clientKey: 'SB-Mid-client-xxxxxxxxxxxxxxxx' },
   fees: { taxPct: 0, serviceFeePct: 0, taxIncluded: false },
   points: { earnPerRp: 10000, earnPts: 1, redeemPts: 100, redeemValue: 5000, minSubtotal: 10000 },

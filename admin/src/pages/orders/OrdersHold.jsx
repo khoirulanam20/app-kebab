@@ -10,7 +10,7 @@ export default function OrdersHold() {
   const nav = useNavigate()
   const { holds, resumeHold, deleteHold, lines } = usePos()
   if (!holds.length) return <Card><EmptyState icon={PauseCircleIcon} title="Tidak ada keranjang di-hold" text="Tekan Hold di halaman kasir untuk menyimpan pesanan sementara." /></Card>
-  const resume = (id) => { resumeHold(id); nav('/') }
+  const resume = (id) => { resumeHold(id); nav('/kasir') }
   return (
     <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
       {holds.map((h) => (

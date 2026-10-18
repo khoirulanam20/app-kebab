@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import AdminShell from '@/components/layout/AdminShell'
 import { usePos } from '@/context/pos'
+import Landing from '@/pages/Landing'
 import Login from '@/pages/Login'
 import Pos from '@/pages/Pos'
 import Payment from '@/pages/Payment'
@@ -37,9 +38,10 @@ function RequireAuth({ children }) {
 export default function App() {
   return (
     <Routes>
+      <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route element={<RequireAuth><AdminShell /></RequireAuth>}>
-        <Route path="/" element={<Pos />} />
+        <Route path="/kasir" element={<Pos />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/kitchen" element={<Kitchen />} />

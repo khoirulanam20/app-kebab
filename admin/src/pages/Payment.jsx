@@ -35,13 +35,13 @@ export default function Payment() {
     return () => window.removeEventListener('keydown', h)
   })
 
-  if (!lines.length && !done) return <Navigate to="/" replace />
+  if (!lines.length && !done) return <Navigate to="/kasir" replace />
   const finish = async () => { if (busy) return; setBusy(true); try { setDone({ ...(await completeSale({ ...amt, change: s.change })), change: s.change }) } finally { setBusy(false) } }
   const quick = [remainingFor(method), 20000, 50000, 100000].filter((v, i, a) => v > 0 && a.indexOf(v) === i)
 
   return (
     <div className="mx-auto max-w-5xl">
-      <Button variant="ghost" onClick={() => nav('/')} className="mb-3 -ml-2"><ChevronLeftIcon /> Kembali ke kasir</Button>
+      <Button variant="ghost" onClick={() => nav('/kasir')} className="mb-3 -ml-2"><ChevronLeftIcon /> Kembali ke kasir</Button>
       <div className="grid gap-4 lg:grid-cols-[1fr_340px]">
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
@@ -80,7 +80,7 @@ export default function Payment() {
           <Button disabled={!s.ok || busy} onClick={finish} className="mt-2 w-full">{busy ? 'Memproses…' : 'Selesaikan pembayaran'}</Button>
         </Card>
       </div>
-      {done && <ReceiptModal order={done} onDone={() => nav('/')} />}
+      {done && <ReceiptModal order={done} onDone={() => nav('/kasir')} />}
     </div>
   )
 }

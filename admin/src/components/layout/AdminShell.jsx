@@ -14,8 +14,8 @@ export default function AdminShell() {
   const perm = permForPath(pathname)
   const allowed = !perm || can(perm)
   // land on the first page this role may open instead of a blocked page
-  if (!allowed && (pathname === '/' || pathname === '/stock')) return <Navigate to={homeFor(user.role, can)} replace />
-  const needShift = (pathname === '/' || pathname === '/payment') && allowed && can('pos')
+  if (!allowed && (pathname === '/kasir' || pathname === '/stock')) return <Navigate to={homeFor(user.role, can)} replace />
+  const needShift = (pathname === '/kasir' || pathname === '/payment') && allowed && can('pos')
   return (
     <div className="flex h-dvh overflow-hidden bg-muted">
       <IconSidebar />

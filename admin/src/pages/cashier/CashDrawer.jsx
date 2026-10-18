@@ -14,7 +14,7 @@ export default function CashDrawer() {
   const { shift, closeShift, notify } = usePos()
   const [counted, setCounted] = useState('')
   const [remark, setRemark] = useState('')
-  if (!shift) return <Card><EmptyState icon={WalletIcon} title="Shift belum dibuka" text="Buka shift dari halaman kasir untuk mulai mencatat penjualan."><Button render={<Link to="/" />} className="mt-2">Ke Kasir</Button></EmptyState></Card>
+  if (!shift) return <Card><EmptyState icon={WalletIcon} title="Shift belum dibuka" text="Buka shift dari halaman kasir untuk mulai mencatat penjualan."><Button render={<Link to="/kasir" />} className="mt-2">Ke Kasir</Button></EmptyState></Card>
   const s = shiftSummary(shift)
   const diff = counted === '' ? null : Number(counted) - s.expected
   const rows = [['Saldo awal laci', s.opening], ['Penjualan tunai', s.cash], ['Penjualan QRIS', s.qris], ['Penjualan kartu', s.card], ['Penjualan transfer', s.transfer]]

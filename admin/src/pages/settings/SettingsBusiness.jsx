@@ -32,6 +32,7 @@ export function SettingsProfile() {
               <div><Label htmlFor="logo" className="mb-1.5 block">Logo</Label><input id="logo" type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) setB({ ...b, logo: URL.createObjectURL(f) }) }} className="text-sm file:mr-3 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:text-sm file:font-medium" /></div></div>
             <div className="space-y-1.5"><Label htmlFor="bn">Nama bisnis</Label><Input id="bn" value={b.name} onChange={set('name')} className={field} /></div>
             <div className="space-y-1.5"><Label htmlFor="bt">Slogan</Label><Input id="bt" value={b.tagline} onChange={set('tagline')} className={field} /></div>
+            <div className="space-y-1.5"><Label htmlFor="bab">Tentang bisnis</Label><textarea id="bab" rows={4} value={b.about ?? ''} onChange={set('about')} maxLength={400} className={area} /><p className="text-[13px] text-muted-foreground">Tampil di halaman profil publik (alamat <code>/</code>). {(b.about ?? '').length}/400</p></div>
           </Section>
           <Section title="Kontak dan lokasi">
             <div className="space-y-1.5"><Label htmlFor="bp">Nomor telepon</Label><Input id="bp" inputMode="tel" value={b.phone} onChange={set('phone')} className={field} /></div>
