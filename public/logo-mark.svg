@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 280" fill="none">
+  <!-- Card Background -->
+  <rect x="6" y="6" width="308" height="268" rx="36" fill="#FFFFFF" stroke="#1F1A17" stroke-width="8"/>
+  
+  <!-- "KEBAB" -->
+  <text x="28" y="96" font-family="'Bowlby One', Impact, sans-serif" font-size="64" fill="#D9242B" letter-spacing="-1">KEBAB</text>
+  
+  <!-- "N" with speed lines -->
+  <g transform="translate(24, 114)">
+    <line x1="0" y1="8" x2="16" y2="8" stroke="#1F1A17" stroke-width="6" stroke-linecap="round"/>
+    <line x1="4" y1="22" x2="20" y2="22" stroke="#1F1A17" stroke-width="6" stroke-linecap="round"/>
+    <line x1="0" y1="36" x2="18" y2="36" stroke="#1F1A17" stroke-width="6" stroke-linecap="round"/>
+    <line x1="6" y1="50" x2="22" y2="50" stroke="#1F1A17" stroke-width="6" stroke-linecap="round"/>
+    <path d="M26 62V4h16l22 42V4h14v58H62L40 20v42H26z" fill="#1F1A17"/>
+  </g>
+
+  <!-- Kebab Wrap Icon In Center -->
+  <g transform="translate(112, 80) rotate(12)">
+    <!-- Wrap Body -->
+    <rect x="0" y="10" width="38" height="80" rx="6" fill="#F6D090" stroke="#1F1A17" stroke-width="4"/>
+    <!-- Grid texture on wrap -->
+    <path d="M6 24h26M6 38h26M6 52h26M6 66h26M6 80h26" stroke="#D79E48" stroke-width="2.5"/>
+    <path d="M12 10v76M24 10v76" stroke="#D79E48" stroke-width="2.5"/>
+    <!-- Top greens and filling -->
+    <path d="M-2 10c2-12 18-14 20-2c3-10 18-10 20 2Z" fill="#38A169" stroke="#1F1A17" stroke-width="3"/>
+    <circle cx="8" cy="4" r="5" fill="#D9242B"/>
+    <circle cx="28" cy="5" r="4.5" fill="#8B4513"/>
+    <path d="M14 6c1 5 3 10 4 14" stroke="#D9242B" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+  
+  <!-- "ME" -->
+  <text x="188" y="176" font-family="'Bowlby One', Impact, sans-serif" font-size="64" fill="#D9242B" letter-spacing="-1">ME</text>
+  
+  <!-- Banner Ribbon Bottom -->
+  <g transform="translate(24, 192)">
+    <!-- Ribbon ends -->
+    <path d="M4 36L28 14V48L4 58Z" fill="#B31B21"/>
+    <path d="M268 36L244 14V48L268 58Z" fill="#B31B21"/>
+    <!-- Main Banner Arc -->
+    <path d="M20 20 Q 136 34 252 20 L 260 52 Q 136 68 12 52 Z" fill="#D9242B"/>
+    <text x="136" y="44" text-anchor="middle" font-family="'Bowlby One', Impact, sans-serif" font-size="19" fill="#FFFFFF" letter-spacing="3">ALWAYS KEBAB</text>
+  </g>
+</svg>

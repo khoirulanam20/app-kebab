@@ -28,8 +28,8 @@ export default function App() {
           <Route path="/me" element={<Me />} />
         </Routes>
       </main>
-      <div aria-live="polite" className="pointer-events-none absolute inset-x-0 bottom-24 z-[60] flex justify-center px-4">
-        {toast && <p className="rounded-full bg-foreground px-5 py-3 text-sm font-medium text-white shadow-lg">{toast}</p>}
+      <div aria-live="polite" className="pointer-events-none absolute inset-x-0 top-4 z-[60] flex justify-center px-4">
+        {toast && <p className="animate-in fade-in slide-in-from-top-4 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-white shadow-lg duration-200">{toast}</p>}
       </div>
       {showMini && (
         <Link to="/checkout" className="relative z-20 flex items-center justify-between bg-cream px-4 py-3 text-sm font-semibold shadow-[0_-1px_0_var(--border)]">

@@ -10,7 +10,7 @@ import ProductSheet from '../components/ProductSheet.jsx'
 import { useCart } from '../cart.jsx'
 import { categories, products, outlets, rupiah } from '../data.js'
 
-const tag = { kebab: 'CHAMPION', paket: 'NEW' }
+const tag = { paket: 'NEW' }
 
 export default function Menu() {
   const nav = useNavigate()
@@ -53,7 +53,18 @@ export default function Menu() {
       </nav>
 
       <section className="no-scrollbar min-h-0 flex-1 overflow-y-auto px-4 pb-12 pt-4">
-        <div className="flex h-36 flex-col items-center justify-center rounded-xl bg-primary text-white"><p className="text-xs tracking-widest text-amber">PROMO OKTOBER</p><p className="mt-1 font-display text-2xl">Always <span className="text-amber">Kebab</span></p></div>
+        <div className="relative flex h-44 flex-col justify-end overflow-hidden rounded-2xl p-4 text-white shadow-md">
+          <img
+            src="/images/banners/menu-promo.jpg"
+            alt="Promo Menu Kebab"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+          <div className="relative z-10">
+            <span className="inline-block rounded-full bg-accent px-2.5 py-0.5 text-[11px] font-bold tracking-widest text-foreground">PROMO OKTOBER</span>
+            <p className="mt-1 font-display text-xl leading-tight">Always <span className="text-accent">Kebab</span></p>
+          </div>
+        </div>
         <h2 className="mb-1 mt-5 text-sm font-semibold uppercase tracking-wide">{q ? `Hasil “${q}”` : categories.find((c) => c.id === cat).name}</h2>
         {list.length ? list.map((p) => <ProductCard key={p.id} p={p} onOpen={setSheet} />) : <p className="py-10 text-center text-muted-foreground">Menunya nggak ketemu</p>}
       </section>

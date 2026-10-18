@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 48" fill="none">
+  <rect width="120" height="48" rx="8" fill="#D9242B"/>
+  <rect x="18" y="14" width="22" height="20" rx="3" stroke="#FFFFFF" stroke-width="2"/>
+  <circle cx="29" cy="24" r="4" fill="#FFFFFF"/>
+  <text x="50" y="27" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="12" fill="#FFFFFF">TUNAI</text>
+  <text x="50" y="36" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="8" fill="#FFE5D9">DI TOKO</text>
+</svg>

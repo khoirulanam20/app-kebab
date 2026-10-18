@@ -27,7 +27,16 @@ export default function ProductSheet({ product: p, onClose }) {
     <Sheet open onOpenChange={(o) => !o && onClose()}>
       <SheetContent side="bottom" showCloseButton={false}>
         <SheetClose render={<Button size="icon" aria-label="Tutup" className="absolute right-4 top-4 z-10 bg-black/30 text-white hover:bg-black/40" />}><XIcon /></SheetClose>
-        <div className="flex h-72 shrink-0 items-center justify-center bg-muted text-primary" aria-hidden><Icon className="size-36" strokeWidth={1} /></div>
+        {p.image ? (
+          <div className="relative h-72 w-full shrink-0 overflow-hidden bg-muted">
+            <img src={p.image} alt={p.name} className="h-full w-full object-cover" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          </div>
+        ) : (
+          <div className="flex h-72 shrink-0 items-center justify-center bg-muted text-primary" aria-hidden>
+            {Icon && <Icon className="size-36" strokeWidth={1} />}
+          </div>
+        )}
         <div className="px-5 pb-4">
           <SheetTitle className="text-xl font-semibold">{p.name}</SheetTitle>
           <SheetDescription className="mt-2 leading-relaxed">{p.desc}</SheetDescription>

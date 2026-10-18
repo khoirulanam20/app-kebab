@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 48" fill="none">
+  <rect width="120" height="48" rx="8" fill="#FFFFFF"/>
+  <path d="M14 12h14v14H14V12zm3 3v8h8v-8h-8z" fill="#E11E26"/>
+  <rect x="19" y="17" width="4" height="4" fill="#E11E26"/>
+  <text x="36" y="31" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="20" fill="#1F1A17" letter-spacing="-0.5">QRIS</text>
+  <path d="M86 16l8-6v6h-8z" fill="#E11E26"/>
+  <text x="36" y="40" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="6.5" fill="#666666" letter-spacing="0.5">PEMBAYARAN DIGITAL</text>
+</svg>

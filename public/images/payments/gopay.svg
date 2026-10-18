@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 48" fill="none">
+  <rect width="120" height="48" rx="8" fill="#00AED6"/>
+  <!-- GoPay Icon -->
+  <circle cx="25" cy="24" r="11" fill="#FFFFFF"/>
+  <circle cx="25" cy="24" r="5.5" fill="#00AED6"/>
+  <!-- GoPay Text -->
+  <text x="44" y="30.5" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="16" fill="#FFFFFF" letter-spacing="-0.5">gopay</text>
+</svg>

@@ -70,7 +70,13 @@ export default function Checkout() {
           <h2 className="font-semibold">Pesanan</h2>
           {items.map((i) => (
             <div key={i.key} className="flex items-center gap-3 py-4">
-              <span aria-hidden className="flex h-16 w-16 items-center justify-center rounded-xl bg-muted text-primary"><i.product.icon className="size-8" strokeWidth={1.5} /></span>
+              {i.product.image ? (
+                <img src={i.product.image} alt={i.product.name} className="h-16 w-16 shrink-0 rounded-xl object-cover shadow-sm" />
+              ) : (
+                <span aria-hidden className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-muted text-primary">
+                  {i.product.icon && <i.product.icon className="size-8" strokeWidth={1.5} />}
+                </span>
+              )}
               <div className="flex-1 text-sm"><p className="font-semibold">{i.product.name}</p>
                 {i.opts.size && <p className="text-muted-foreground">{[i.opts.size, i.opts.pedas, ...i.opts.extra].join(', ')}</p>}
                 <p className="mt-1">{rupiah(i.unit)}</p></div>

@@ -10,6 +10,8 @@ import { products, rupiah } from '../data.js'
 const lineTab = 'h-11 flex-none px-0 text-muted-foreground data-active:text-foreground after:bottom-0 after:bg-primary'
 
 function OrderCard({ o, onRate, onAgain }) {
+  const prod = products.find((p) => p.id === o.lines?.[0]?.pid)
+  const img = prod?.image
   return (
     <Card className="p-4">
       <div className="flex items-center justify-between gap-2">
@@ -18,7 +20,11 @@ function OrderCard({ o, onRate, onAgain }) {
       </div>
       <p className="text-sm text-muted-foreground">{o.date} · {o.id}</p>
       <div className="mt-3 flex items-start justify-between gap-3">
-        <span aria-hidden className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-muted text-primary"><SandwichIcon className="size-6" /></span>
+        {img ? (
+          <img src={img} alt={o.items} className="h-12 w-12 shrink-0 rounded-lg object-cover shadow-sm" />
+        ) : (
+          <span aria-hidden className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-muted text-primary"><SandwichIcon className="size-6" /></span>
+        )}
         <p className="flex-1 text-sm">{o.items}</p><p className="text-sm font-semibold">{rupiah(o.total)}</p>
       </div>
       {!o.active && (

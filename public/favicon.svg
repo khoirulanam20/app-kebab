@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="16" fill="#F4B000"/>
+  <!-- Stylized Kebab Wrap Favicon -->
+  <g transform="translate(14, 10)">
+    <!-- Tortilla wrap -->
+    <path d="M7 16L18 8L30 24L19 32Z" fill="#E6A15C"/>
+    <path d="M6 16L17 40L29 33L18 9Z" fill="#FCEFD2" stroke="#1F1A17" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- Grill marks -->
+    <line x1="10" y1="20" x2="16" y2="18" stroke="#C67D38" stroke-width="2" stroke-linecap="round"/>
+    <line x1="12" y1="26" x2="20" y2="24" stroke="#C67D38" stroke-width="2" stroke-linecap="round"/>
+    <line x1="14" y1="32" x2="22" y2="30" stroke="#C67D38" stroke-width="2" stroke-linecap="round"/>
+    <!-- Veggies & Meat filling on top -->
+    <path d="M12 11C12 8 16 6 18 8C20 6 24 8 24 11C23 13 13 14 12 11Z" fill="#38A169"/>
+    <circle cx="16" cy="11" r="2.5" fill="#D9242B"/>
+    <circle cx="21" cy="12" r="2" fill="#8B4513"/>
+    <path d="M17 13C17 16 18 19 19 21" stroke="#D9242B" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

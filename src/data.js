@@ -12,16 +12,16 @@ export const categories = [
 ]
 
 export const products = [
-  { id: 1, cat: 'kebab', name: 'Kebab Original', price: 18000, icon: Sandwich, badge: 'Terlaris', desc: 'Tortilla lembut isi daging sapi, selada, tomat, dan saus spesial Kebab N Me.' },
-  { id: 2, cat: 'kebab', name: 'Kebab Jumbo Keju', price: 28000, icon: Sandwich, badge: 'Baru', desc: 'Ukuran jumbo dengan lelehan keju mozzarella dan daging ekstra.' },
-  { id: 3, cat: 'kebab', name: 'Kebab Ayam Pedas', price: 20000, icon: Sandwich, desc: 'Ayam bumbu pedas manis, bawang bombay, dan mayo sambal.' },
-  { id: 4, cat: 'burger', name: 'Burger Kebab Beef', price: 24000, icon: Hamburger, desc: 'Roti burger isi daging kebab, keju, dan saus bawang putih.' },
-  { id: 5, cat: 'hotdog', name: 'Hotdog Kebab', price: 16000, icon: Beef, desc: 'Roti panjang dengan sosis sapi dan irisan daging kebab.' },
-  { id: 6, cat: 'paket', name: 'Paket Kenyang', price: 32000, was: 38000, icon: Package, badge: 'Hemat', desc: 'Kebab Original + kentang goreng + es teh.' },
-  { id: 7, cat: 'paket', name: 'Paket Berdua', price: 55000, was: 64000, icon: Package, desc: '2 Kebab Original + 2 minuman + 1 kentang goreng.' },
-  { id: 8, cat: 'minum', name: 'Es Teh Manis', price: 6000, icon: CupSoda, desc: 'Teh segar dingin, manisnya pas.' },
-  { id: 9, cat: 'minum', name: 'Lemon Tea', price: 9000, icon: CupSoda, desc: 'Teh dengan perasan lemon segar.' },
-  { id: 10, cat: 'tambahan', name: 'Kentang Goreng', price: 12000, icon: Popcorn, desc: 'Kentang renyah dengan bumbu tabur.' },
+  { id: 1, cat: 'kebab', name: 'Kebab Original', price: 18000, icon: Sandwich, image: '/images/products/kebab-original.jpg', badge: 'Terlaris', desc: 'Tortilla lembut isi daging sapi, selada, tomat, dan saus spesial Kebab N Me.' },
+  { id: 2, cat: 'kebab', name: 'Kebab Jumbo Keju', price: 28000, icon: Sandwich, image: '/images/products/kebab-jumbo-keju.jpg', badge: 'Baru', desc: 'Ukuran jumbo dengan lelehan keju mozzarella dan daging ekstra.' },
+  { id: 3, cat: 'kebab', name: 'Kebab Ayam Pedas', price: 20000, icon: Sandwich, image: '/images/products/kebab-ayam-pedas.jpg', desc: 'Ayam bumbu pedas manis, bawang bombay, dan mayo sambal.' },
+  { id: 4, cat: 'burger', name: 'Burger Kebab Beef', price: 24000, icon: Hamburger, image: '/images/products/burger-kebab.jpg', desc: 'Roti burger isi daging kebab, keju, dan saus bawang putih.' },
+  { id: 5, cat: 'hotdog', name: 'Hotdog Kebab', price: 16000, icon: Beef, image: '/images/products/hotdog-kebab.jpg', desc: 'Roti panjang dengan sosis sapi dan irisan daging kebab.' },
+  { id: 6, cat: 'paket', name: 'Paket Kenyang', price: 32000, was: 38000, icon: Package, image: '/images/products/paket-kenyang.jpg', badge: 'Hemat', desc: 'Kebab Original + kentang goreng + es teh.' },
+  { id: 7, cat: 'paket', name: 'Paket Berdua', price: 55000, was: 64000, icon: Package, image: '/images/products/paket-berdua.jpg', desc: '2 Kebab Original + 2 minuman + 1 kentang goreng.' },
+  { id: 8, cat: 'minum', name: 'Es Teh Manis', price: 6000, icon: CupSoda, image: '/images/products/es-teh-manis.jpg', desc: 'Teh segar dingin, manisnya pas.' },
+  { id: 9, cat: 'minum', name: 'Lemon Tea', price: 9000, icon: CupSoda, image: '/images/products/lemon-tea.jpg', desc: 'Teh dengan perasan lemon segar.' },
+  { id: 10, cat: 'tambahan', name: 'Kentang Goreng', price: 12000, icon: Popcorn, image: '/images/products/kentang-goreng.jpg', desc: 'Kentang renyah dengan bumbu tabur.' },
 ]
 
 export const sizes = [{ n: 'Regular', add: 0 }, { n: 'Jumbo', add: 8000 }]
@@ -34,12 +34,12 @@ export const outlets = [
 ]
 
 export const payments = [
-  { id: 'qris', name: 'QRIS', note: 'Semua e-wallet & m-banking', color: '#1f1a17' },
-  { id: 'shopee', name: 'ShopeePay', note: 'Diskon 5K min. transaksi 40K', color: '#ee4d2d' },
-  { id: 'gopay', name: 'GoPay', note: '', color: '#00aed6' },
-  { id: 'ovo', name: 'OVO', note: '', color: '#4c2a86' },
-  { id: 'dana', name: 'DANA', note: '', color: '#118eea' },
-  { id: 'cash', name: 'Bayar di Toko', note: 'Tunai saat ambil pesanan', color: '#d9242b' },
+  { id: 'qris', name: 'QRIS', note: 'Semua e-wallet & m-banking', color: '#1f1a17', logo: '/images/payments/qris.svg' },
+  { id: 'shopee', name: 'ShopeePay', note: 'Diskon 5K min. transaksi 40K', color: '#ee4d2d', logo: '/images/payments/shopeepay.svg' },
+  { id: 'gopay', name: 'GoPay', note: '', color: '#00aed6', logo: '/images/payments/gopay.svg' },
+  { id: 'ovo', name: 'OVO', note: '', color: '#4c2a86', logo: '/images/payments/ovo.svg' },
+  { id: 'dana', name: 'DANA', note: '', color: '#118eea', logo: '/images/payments/dana.svg' },
+  { id: 'cash', name: 'Bayar di Toko', note: 'Tunai saat ambil pesanan', color: '#d9242b', logo: '/images/payments/cash.svg' },
 ]
 
 export const pastOrders = [

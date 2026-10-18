@@ -41,7 +41,13 @@ export default function Payment() {
         <RadioGroup value={sel} onValueChange={setSel} aria-label="Metode Pembayaran" className="gap-0">
           {payments.map((p) => (
             <Label key={p.id} className="flex h-16 cursor-pointer items-center gap-3 py-3">
-              <span aria-hidden className="flex h-11 w-11 items-center justify-center rounded-xl text-lg font-bold text-white" style={{ background: p.color }}>{p.name[0]}</span>
+              {p.logo ? (
+                <div className="flex h-11 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-white p-1 shadow-sm">
+                  <img src={p.logo} alt={p.name} className="h-full w-full object-contain" />
+                </div>
+              ) : (
+                <span aria-hidden className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg font-bold text-white" style={{ background: p.color }}>{p.name[0]}</span>
+              )}
               <span className="flex-1"><span className="block font-semibold">{p.name}</span>{p.note && <span className="block text-xs font-normal text-muted-foreground">{p.note}</span>}</span>
               <RadioGroupItem value={p.id} className="size-6" />
             </Label>

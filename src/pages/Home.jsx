@@ -11,18 +11,16 @@ import { useCart } from '../cart.jsx'
 import { products, rupiah, POINTS, GOLD_AT } from '../data.js'
 
 const slides = [
-  { title: 'Always', accent: 'Kebab', sub: 'Beli 5 gratis 1, Bang!', tag: 'STEMPEL', icon: SandwichIcon, bg: 'bg-primary', fg: 'text-white', hl: 'text-accent' },
-  { title: 'Paket', accent: 'Kenyang', sub: 'Kebab + kentang + es teh, Rp 32.000', tag: 'HEMAT 6K', icon: PackageIcon, bg: 'bg-accent', fg: 'text-foreground', hl: 'text-primary' },
-  { title: 'Gratis', accent: 'Ongkir', sub: 'Min. order Rp 50.000, minggu ini aja', tag: 'DIANTAR', icon: MotorbikeIcon, bg: 'bg-foreground', fg: 'text-white', hl: 'text-accent' },
+  { title: 'Always', accent: 'Kebab', sub: 'Beli 5 gratis 1, Bang!', tag: 'STEMPEL', icon: SandwichIcon, image: '/images/products/kebab-original.jpg', bg: 'bg-primary', fg: 'text-white', hl: 'text-accent' },
+  { title: 'Paket', accent: 'Kenyang', sub: 'Kebab + kentang + es teh, Rp 32.000', tag: 'HEMAT 6K', icon: PackageIcon, image: '/images/products/paket-kenyang.jpg', bg: 'bg-accent', fg: 'text-foreground', hl: 'text-primary' },
+  { title: 'Gratis', accent: 'Ongkir', sub: 'Min. order Rp 50.000, minggu ini aja', tag: 'DIANTAR', icon: MotorbikeIcon, image: '/images/banners/delivery-rider.jpg', bg: 'bg-foreground', fg: 'text-white', hl: 'text-accent' },
 ]
 
-// centered poster, used by the popup
-function Poster({ s, className = '' }) {
+// poster used by the promo popup
+function Poster({ className = '' }) {
   return (
-    <div className={`flex flex-col items-center justify-center text-center ${s.bg} ${s.fg} ${className}`}>
-      <img src="/logo-mark.png" alt="Kebab N Me – Always Kebab" className="logo-round h-16" />
-      <p className="mt-3 font-display text-2xl tracking-wide">{s.title} <span className={s.hl}>{s.accent}</span></p>
-      <p className="mt-2 text-sm font-medium opacity-90">{s.sub}</p>
+    <div className={`relative overflow-hidden rounded-2xl shadow-2xl ${className}`}>
+      <img src="/images/banners/popup-poster.jpg" alt="Promo Kebab N Me – Beli 5 Gratis 1" className="h-full w-full object-cover" />
     </div>
   )
 }
@@ -30,12 +28,18 @@ function Poster({ s, className = '' }) {
 function Banner({ s }) {
   return (
     <div className={`relative flex h-48 items-center justify-between overflow-hidden rounded-2xl p-5 pb-9 ${s.bg} ${s.fg}`}>
-      <div className="relative z-10">
+      <div className="relative z-10 max-w-[58%]">
         <span className="rounded-full border-2 border-current px-2.5 py-0.5 text-xs font-semibold tracking-wide">{s.tag}</span>
         <p className="mt-2 font-display text-2xl leading-tight">{s.title} <span className={s.hl}>{s.accent}</span></p>
-        <p className="mt-1 max-w-[12rem] text-[13px] font-medium opacity-90">{s.sub}</p>
+        <p className="mt-1 text-[13px] font-medium opacity-90">{s.sub}</p>
       </div>
-      <s.icon aria-hidden className="absolute -right-3 bottom-0 size-32 opacity-25" strokeWidth={1} />
+      {s.image ? (
+        <div className="absolute -bottom-1 -right-1 h-36 w-36 overflow-hidden rounded-2xl shadow-lg ring-2 ring-white/20">
+          <img src={s.image} alt={s.title} className="h-full w-full object-cover" />
+        </div>
+      ) : (
+        <s.icon aria-hidden className="absolute -right-3 bottom-0 size-32 opacity-25" strokeWidth={1} />
+      )}
     </div>
   )
 }
@@ -124,9 +128,15 @@ export default function Home() {
         <h2 className="mb-3 px-4 text-lg font-semibold">Promo Hari Ini</h2>
         <div className="no-scrollbar flex gap-3 overflow-x-auto px-4">
           {deals.map((p) => (
-            <div key={p.id} className="w-[75%] shrink-0 overflow-hidden rounded-2xl border-2 border-border bg-white">
+            <div key={p.id} className="w-[75%] shrink-0 overflow-hidden rounded-2xl border-2 border-border bg-white shadow-sm">
               <div className="flex items-center gap-4 p-4">
-                <span aria-hidden className="flex size-16 shrink-0 items-center justify-center rounded-xl bg-accent/30 text-primary"><p.icon className="size-9" strokeWidth={1.25} /></span>
+                {p.image ? (
+                  <img src={p.image} alt={p.name} className="size-16 shrink-0 rounded-xl object-cover shadow-sm" />
+                ) : (
+                  <span aria-hidden className="flex size-16 shrink-0 items-center justify-center rounded-xl bg-accent/30 text-primary">
+                    <p.icon className="size-9" strokeWidth={1.25} />
+                  </span>
+                )}
                 <div><p className="font-semibold leading-tight">{p.name}</p><Badge className="mt-1.5 bg-accent text-foreground">Hemat {rupiah(p.was - p.price)}</Badge></div>
               </div>
               <div className="flex items-center justify-between bg-primary px-4 py-3 text-white">
@@ -138,13 +148,33 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mt-8 rounded-t-[32px] bg-primary px-4 pb-8 pt-8 text-white">
-        <h2 className="font-display text-2xl leading-tight">Dagingnya diiris<br />pas kamu pesan.</h2>
-        <p className="mt-2 text-sm text-white/90">Bukan stok kemarin. Abang janji.</p>
+      <section className="relative mt-8 overflow-hidden rounded-t-[32px] bg-primary px-4 pb-8 pt-8 text-white">
+        <div className="relative z-10">
+          <h2 className="font-display text-2xl leading-tight">Dagingnya diiris<br />pas kamu pesan.</h2>
+          <p className="mt-2 text-sm text-white/90">Bukan stok kemarin. Abang janji.</p>
+        </div>
+
+        {/* Real photo proof for headline claim */}
+        <div className="relative mt-4 overflow-hidden rounded-2xl border-2 border-white/20 shadow-md">
+          <img
+            src="/images/banners/kebab-slicing.jpg"
+            alt="Daging kebab diiris segar saat kamu pesan"
+            className="h-44 w-full object-cover"
+          />
+          <div className="absolute bottom-2 left-2 rounded-lg bg-black/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
+            🔥 Selalu fresh dari panggangan
+          </div>
+        </div>
+
         <button onClick={() => nav('/menu')} className="mt-5 block w-full rounded-2xl border-2 border-foreground bg-accent p-5 text-left text-foreground shadow-[4px_4px_0_#1f1a17] active:translate-y-0.5">
-          <span className="text-[13px] font-semibold tracking-widest">BARENG TEMAN?</span>
-          <span className="mt-1 block font-display text-2xl">Paket Berdua</span>
-          <span className="mt-1 block text-sm">2 kebab + 2 minuman + 1 kentang · hemat Rp 9.000</span>
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <span className="text-[13px] font-semibold tracking-widest">BARENG TEMAN?</span>
+              <span className="mt-1 block font-display text-2xl">Paket Berdua</span>
+              <span className="mt-1 block text-sm">2 kebab + 2 minuman + 1 kentang · hemat Rp 9.000</span>
+            </div>
+            <img src="/images/products/paket-berdua.jpg" alt="Paket Berdua" className="size-20 shrink-0 rounded-xl border-2 border-foreground object-cover shadow-sm" />
+          </div>
           <span className="mt-4 inline-flex h-11 items-center rounded-full bg-foreground px-6 text-sm font-semibold text-white">Sikat, Bang!</span>
         </button>
       </section>
@@ -153,10 +183,16 @@ export default function Home() {
         <div className="mb-3 flex items-center justify-between"><h2 className="text-lg font-semibold">Andalan Abang</h2><button onClick={() => nav('/menu')} className="text-sm font-medium text-primary">Lihat semua menu</button></div>
         <div className="grid grid-cols-2 gap-3">
           {picks.map((p) => (
-            <div key={p.id} className="relative overflow-hidden rounded-2xl bg-white p-3">
+            <div key={p.id} className="relative overflow-hidden rounded-2xl bg-white p-3 shadow-sm">
               {p.badge && <Badge className="absolute left-3 top-3 z-10">{p.badge}</Badge>}
               <button onClick={() => setSheet(p)} className="block w-full text-left" aria-label={`Atur ${p.name}`}>
-                <span aria-hidden className="flex h-28 items-center justify-center rounded-xl bg-accent/30 text-primary"><p.icon className="size-14" strokeWidth={1.25} /></span>
+                {p.image ? (
+                  <img src={p.image} alt={p.name} className="h-28 w-full rounded-xl object-cover" />
+                ) : (
+                  <span aria-hidden className="flex h-28 items-center justify-center rounded-xl bg-accent/30 text-primary">
+                    <p.icon className="size-14" strokeWidth={1.25} />
+                  </span>
+                )}
                 <span className="mt-3 block min-h-10 text-sm font-medium leading-snug">{p.name}</span>
               </button>
               <div className="mt-2 flex items-center justify-between"><span className="text-sm font-semibold">{rupiah(p.price)}</span>
@@ -169,7 +205,7 @@ export default function Home() {
       <Dialog open={popup} onOpenChange={closePopup}>
         <DialogContent showCloseButton={false} className="justify-items-center gap-6 bg-transparent p-0 ring-0">
           <DialogTitle className="sr-only">Promo</DialogTitle>
-          <Poster s={slides[0]} className="aspect-[3/4] w-full rounded-xl" />
+          <Poster className="aspect-[3/4] w-full rounded-2xl" />
           <DialogClose render={<Button size="icon-lg" aria-label="Tutup" className="size-11 border-2 border-white bg-black/40 text-white hover:bg-black/50" />}><XIcon /></DialogClose>
         </DialogContent>
       </Dialog>
