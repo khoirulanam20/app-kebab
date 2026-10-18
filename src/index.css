@@ -73,3 +73,6 @@
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* matches the corner radius of the white card in the original logo (~45px on a 596x486 crop) */
+.logo-round { border-radius: 7.5% / 9.2%; }

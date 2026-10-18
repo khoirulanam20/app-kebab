@@ -16,7 +16,7 @@ export default function Me() {
   return (
     <div className="min-h-full bg-muted pb-14">
       <header className="relative flex h-56 items-start gap-4 overflow-hidden bg-primary px-5 pt-16 text-white">
-        <img src="/logo-mark.png" alt="" aria-hidden className="pointer-events-none absolute -bottom-2 -right-8 w-44 -rotate-6 rounded-2xl opacity-30" />
+        <img src="/logo-mark.png" alt="" aria-hidden className="pointer-events-none absolute -bottom-2 -right-8 w-44 -rotate-6 opacity-30 logo-round" />
         <Avatar className="relative size-16 border-2 border-white"><AvatarFallback className="bg-accent text-lg font-bold text-foreground">KA</AvatarFallback></Avatar>
         <div className="relative pt-2"><h1 className="font-display text-lg">Khoirul Anam</h1><p className="text-sm text-white/90">Langganan tetap abang</p></div>
       </header>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useEmblaCarousel from 'embla-carousel-react'
-import { XIcon, TicketIcon, CoinsIcon, PackageCheckIcon, MotorbikeIcon, TagIcon, TargetIcon, UsersIcon, ReceiptTextIcon, ShoppingBagIcon, PlusIcon, SandwichIcon, PackageIcon } from 'lucide-react'
+import { XIcon, TicketIcon, CoinsIcon, PackageCheckIcon, MotorbikeIcon, TagIcon, TargetIcon, UsersIcon, ReceiptTextIcon, PlusIcon, SandwichIcon, PackageIcon } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -20,7 +20,7 @@ const slides = [
 function Poster({ s, className = '' }) {
   return (
     <div className={`flex flex-col items-center justify-center text-center ${s.bg} ${s.fg} ${className}`}>
-      <img src="/logo-mark.png" alt="Kebab N Me – Always Kebab" className="h-16 rounded-xl border-2 border-foreground" />
+      <img src="/logo-mark.png" alt="Kebab N Me – Always Kebab" className="logo-round h-16" />
       <p className="mt-3 font-display text-2xl tracking-wide">{s.title} <span className={s.hl}>{s.accent}</span></p>
       <p className="mt-2 text-sm font-medium opacity-90">{s.sub}</p>
     </div>
@@ -29,7 +29,7 @@ function Poster({ s, className = '' }) {
 
 function Banner({ s }) {
   return (
-    <div className={`relative flex h-40 items-center justify-between overflow-hidden rounded-2xl p-5 pb-9 ${s.bg} ${s.fg}`}>
+    <div className={`relative flex h-48 items-center justify-between overflow-hidden rounded-2xl p-5 pb-9 ${s.bg} ${s.fg}`}>
       <div className="relative z-10">
         <span className="rounded-full border-2 border-current px-2.5 py-0.5 text-xs font-semibold tracking-wide">{s.tag}</span>
         <p className="mt-2 font-display text-2xl leading-tight">{s.title} <span className={s.hl}>{s.accent}</span></p>
@@ -56,7 +56,7 @@ function BannerCarousel() {
     return () => clearInterval(t)
   }, [api, paused])
   return (
-    <div className="relative px-4" role="region" aria-roledescription="carousel" aria-label="Promo">
+    <div className="relative px-4 pt-4" role="region" aria-roledescription="carousel" aria-label="Promo">
       <div ref={ref} className="overflow-hidden rounded-2xl">
         <div className="flex">
           {slides.map((s, i) => (
@@ -85,7 +85,7 @@ const ModeButton = ({ icon: Icon, title, note, onClick }) => (
 
 export default function Home() {
   const nav = useNavigate()
-  const { setMode, count, notify } = useCart()
+  const { setMode, notify } = useCart()
   const [popup, setPopup] = useState(() => !sessionStorage.getItem('knm-popup'))
   const [sheet, setSheet] = useState(null)
   const go = (m) => { setMode(m); nav('/menu') }
@@ -97,15 +97,6 @@ export default function Home() {
 
   return (
     <div className="bg-white pb-14">
-      <header className="sticky top-0 z-30 flex items-center gap-3 bg-white px-4 py-3 shadow-[0_1px_0_var(--border)]">
-        <img src="/logo-mark.png" alt="Kebab N Me" className="h-9 rounded-lg" />
-        <div className="flex-1" />
-        <Button variant="secondary" size="icon" onClick={() => nav('/checkout')} aria-label={`Keranjang, ${count} item`} className="relative size-11">
-          <ShoppingBagIcon className="size-5" />
-          {count > 0 && <Badge className="absolute -right-1 -top-1 h-5 min-w-5 px-1 text-xs">{count}</Badge>}
-        </Button>
-      </header>
-
       <BannerCarousel />
 
       <section className="mt-5 px-4" aria-label="Pesan sekarang">
